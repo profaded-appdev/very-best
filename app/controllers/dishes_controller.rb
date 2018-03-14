@@ -3,6 +3,15 @@ class DishesController < ApplicationController
     @q = Dish.ransack(params[:q])
     @dishes = @q.result(:distinct => true).includes(:cuisine, :bookmarks, :fans, :specialists).page(params[:page]).per(10)
 
+
+    @r = Venue.ransack(params[:q])
+    @venues = @r.result(:distinct => true).includes(:bookmarks, :neighborhood, :fans, :specialties).page(params[:page]).per(10)
+     
+     
+    @s = current_user.bookmarks.ransack(params[:q])
+    @bookmarks = @s.result(:distinct => true).includes(:user, :venue, :dish).page(params[:page]).per(10)
+
+   
     render("dishes/index.html.erb")
   end
 
