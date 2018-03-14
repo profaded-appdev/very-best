@@ -1,9 +1,22 @@
+<head>
+  <!--Connecting Bootstrap-->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+
 <div class="page-header">
   <h1>
     Dishes
     <a href="/dishes/new" class="btn btn-lg btn-success">New Dish</a>
   </h1>
-</div><div class="row mb-1">
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"><!--left column-->
+      
+<div class="row mb-1">
   <div class="col-md-12">
     <%= search_form_for @q, :class => "collapse", :id => "dishes_filters" do |f| %>
       <p class="lead">Narrow results:</p>
@@ -82,19 +95,44 @@
     </a>
   </div>
 </div>
-
-<div class="row">
+      
+      
+    </div><!--left column-->
+    
+    
+    
+    
+  <div class="col-lg-5"> <!--middle column-->
+  <div class="row">
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Name</th>
+        <th>The very best...</th>
+        <th>is at...</th>
         <th>Cuisine</th>
         <th>Actions</th>
       </tr>
 
       <% @dishes.each do |dish| %>
+
       <tr>
-        <td><%= dish.name %></td>
+        <td>
+          <a href="/dishes/<%= dish.id %>"> <%= dish.name %>
+          </a>
+          
+          </td>
+
+        <td>
+        <% @bookmarks.each do |bookmark| %>
+        <% @name_of_dish_in_dishes_table = dish.name %>
+        <% @name_of_dish_in_booksmarks_table = bookmark.dish.name %>
+        <% if @name_of_dish_in_dishes_table == @name_of_dish_in_booksmarks_table %>
+        <% @variable = Bookmark.find_by(:dish_id => bookmark.dish.id).venue_id %>
+        <%= Venue.find(@variable).name %>
+        <% end %>
+        <% end %>
+        </td>
+    
         <td>
           <% if dish.cuisine.present? %>
             <a href="/cuisines/<%= dish.cuisine.id %>">
@@ -109,7 +147,22 @@
         </td>
       </tr>
       <% end %>
+
     </table>
     <%= paginate @dishes, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
+</div> <!--middle column-->
+
+
+
+<div class="col-lg-4"> <!--right column-->
+      
+      
+<a href="/venues/new">
+<button type="button" class="btn btn-block btn-success"> Add a new venue </button>
+</a>
+
+      </div><!--right column-->
   </div>
 </div>
