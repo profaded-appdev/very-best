@@ -5,14 +5,14 @@
     <%= search_form_for @q, :class => "collapse", :id => "venues_filters" do |f| %>
       <p class="lead">Narrow results:</p>
 
-        <div class="form-group">
-    <%= f.label :name_cont, "Name contains" %>
-    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
-  </div>
+<div class="form-group">
+      <%= f.label :specialties_name_cont, "Dish name contains" %>
+      <%= f.text_field :specialties_name_cont, :class => "form-control", :placeholder => "Dish name contains" %>
+    </div>
 
 <div class="form-group">
-      <%= f.label :bookmarks_notes_or_specialties_name_cont, "Bookmark dish name contains" %>
-      <%= f.text_field :bookmarks_notes_or_specialties_name_cont, :class => "form-control", :placeholder => "Bookmark dish name contains" %>
+      <%= f.label :bookmarks_notes_or_specialties_name_cont, "Bookmarked dish name contains" %>
+      <%= f.text_field :bookmarks_notes_or_specialties_name_cont, :class => "form-control", :placeholder => "Bookmarked dish name contains" %>
     </div>
 
 

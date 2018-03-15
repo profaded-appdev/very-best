@@ -65,7 +65,7 @@
               });
           });
       </script>
-      
+
         <div class="form-group">
       <%= f.label :cuisine_name_cont, "Cuisine name contains" %>
       <%= f.text_field :cuisine_name_cont, :class => "form-control", :placeholder => "Cuisine name contains" %>
@@ -93,8 +93,7 @@
     <a class="btn btn-secondary btn-block mb-1" data-toggle="collapse" href="#dishes_filters">
       Show Filters
     </a>
-  </div>      
-
+  </div>
 </div>
       
       
@@ -129,34 +128,30 @@
         <a href="/venues/<%=Bookmark.find_by(:dish_id => dish.id).venue.id %>"><%=Bookmark.find_by(:dish_id => dish.id).venue.name %></a>
         <% elsif %>
           
-        <li class="list-group-item">
-          <form action="/create_bookmark" class="form-inline float-left" method="post">
+          <li class="list-group-item">
+            <form action="/create_bookmark" class="form-inline float-left" method="post">
               <!-- Hidden input for authenticity token to protect from forgery -->
               <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
         
-            <!-- Label and input for dish_id -->
-            <input type="hidden" name="dish_id" value="<%= dish.id %>">
-            
-            <!-- Label and input for venue_id -->
+              <!-- Label and input for dish_id -->
               <div class="form-group">
-                 <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
+                 <%= select_tag(:dish_id, options_from_collection_for_select(Venue.all, :id, :name, dish.id), :class => "form-control") %>
+                 
               </div>
-
+        
             <!-- Label and input for user_id -->
               <input type="hidden" name="user_id" value="<%= current_user.id %>">
         
         
               <button class="btn btn-primary btn">
                       <i class="fa fa-heart"></i>
-              </button>
-      </form>
+                    </button>
+                  </form>
                   <small class="float-right text-muted">
                     right now
                   </small>
-          </li>
-    </form>
-  </li>
-      </form>
+                </li>
+            </form>
           </li>
      <% end %>
         
